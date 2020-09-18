@@ -1,0 +1,52 @@
+<template>
+    <div class="card">
+        <h2>Donation</h2>
+        <img src="@/assets/btcaddress.jpg" alt="Avatar" style="width:100%">
+        <div class="container">
+            <h4><b>My Bitcoin address</b></h4>
+            <div>{{btcAddress.slice(0,10)}}...
+                <button class="unstyled-button"
+                    v-clipboard:copy="btcAddress">
+                    <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'copy'}" size="2x" style="color: gray;"/>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+  name: 'BtcDonation',
+  data () {
+    return {
+      btcAddress: '16oQwrtahXXv5kuPD8mKnhV6dD6LANL6Aw'
+    }
+  }
+}
+</script>
+
+<style scoped>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 0px;
+}
+
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+</style>

@@ -1,0 +1,1 @@
+GET https://api.openrates.io/latest?base=USD&symbols=GBP,EUR

@@ -1,0 +1,234 @@
+<template>
+  <div class="main">
+    <FormMyCoin
+      :coin='coin'
+      :fiatNames='fiatNames'
+      :cryptoNames='cryptoNames'
+      @updateMode="updateMode"
+      v-show="formVisible"
+    />
+    <h1 v-show="!formVisible">ADD
+        <font-awesome-icon
+        :icon="{ prefix: 'fas', iconName: 'plus-square' }"
+        @click="add()"/>
+    </h1>
+    <table v-show="myCoins.length && !formVisible">
+        <!-- <caption>Statement Summary</caption> -->
+        <thead>
+            <tr>
+              <th scope="col" class="column-left">Name</th>
+              <th scope="col">Buy price (Fiat)</th>
+              <th scope="col">Buy price (USD)</th>
+              <th scope="col">Current price (USD)</th>
+              <th scope="col">Allocation</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Buy value</th>
+              <th scope="col">Current Value</th>
+              <th scope="col" class='gainloss'>Gain / Loss</th>
+              <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="myCoin in myCoins" :key="myCoin.id">
+              <td data-label="Name" class="column-left">{{ myCoin.name }}</td>
+              <td data-label="Buy price (Fiat)">{{ myCoin.fiat }} {{ toFixed(myCoin.buyPriceFiat) }}</td>
+              <td data-label="Buy price (USD)">{{`$`}} {{ toFixed(myCoin.buyPriceUSD) }}</td>
+              <td :style="{backgroundColor:myCoin.currentPriceColor}"
+                  data-label="Current price">{{`$`}} {{ toFixed(myCoin.currentPrice) }}
+              </td>
+              <td data-label="Allocation">{{ toFixedPercent(myCoin.allocation) }} {{`%`}}</td>
+              <td data-label="Amount">{{ toFixed(myCoin.amount) }}</td>
+              <td data-label="Buy Value">{{`$`}} {{ toFixed(myCoin.buyValue) }}</td>
+              <td data-label="Current Value">{{`$`}} {{ toFixed(myCoin.currentValue) }}</td>
+              <td data-label="Gain/Loss"
+                :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? 'red' : 'navy'}">
+                {{`$`}} {{ toFixed(myCoin.gainLoss) }} ({{ toFixedPercent(myCoin.gainLossPercent) }}%)
+              </td>
+              <td data-label="Actions">
+                <font-awesome-icon
+                  :icon="{ prefix: 'fas', iconName: 'edit' }"
+                  @click="upt(myCoin)"
+                  class='icon'
+                />
+                <font-awesome-icon
+                  :icon="{ prefix: 'fas', iconName: 'trash-alt' }"
+                  @click="del(myCoin)"
+                  class='icon'
+                />
+              </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import FormMyCoin from '../components/FormMyCoin.vue'
+
+export default {
+  name: 'MyCoins',
+  components: {
+    FormMyCoin
+  },
+  data: function () {
+    return {
+      minutes: 20,
+      coin: {},
+      formVisible: false
+    }
+  },
+  methods: {
+    ...mapActions([
+      'loadMyCoins',
+      'deleteCoin',
+      'loadPrices',
+      'loadFiat'
+    ]),
+    add () {
+      this.coin = {}
+      this.updateMode(true)
+    },
+    upt (coin) {
+      this.coin = coin
+      this.updateMode(true)
+    },
+    async del (coin) {
+      await this.deleteCoin(coin)
+    },
+    updateMode (visible) {
+      this.formVisible = visible
+    },
+    // TODO mixin it
+    toFixed: num => {
+      return isNaN(num) ? '0' : parseFloat(num).toFixed(num <= 0 || num >= 1 ? 2 : 5)
+    },
+    toFixedPercent: num => {
+      return isNaN(num) ? '0' : parseFloat(num).toFixed(2)
+    }
+  },
+  async mounted () {
+    await this.loadFiat()
+    await this.loadMyCoins()
+    await this.loadPrices()
+  },
+  computed: {
+    ...mapGetters({
+      myCoins: 'getMyCoins',
+      fiatNames: 'getFiatNames',
+      cryptoNames: 'getCryptoNames'
+      // fiatRate: 'getFiatRate'
+    })
+  }
+}
+</script>
+
+<style scoped>
+.main {
+  text-align: center;
+  padding-top: 68px;
+  font-weight: 100;
+  text-align: center;
+
+}
+
+h1 {
+  padding: 10px;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width:70%;
+  margin: 0 15% 0 15%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: right;
+}
+
+.column-left {
+  padding-left: 1.625em;
+  text-align: left;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.gainloss {
+  width: 200px;
+}
+
+.icon {
+  padding: 2px;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+</style>
