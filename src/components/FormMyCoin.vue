@@ -18,8 +18,8 @@
           </select>
       </li>
       <li class="form-row">
-        <label for="buyPriceFiat">Fiat Price</label>
-        <input v-model="coin.buyPriceFiat" id="buyPriceFiat" placeholder="Enter the buy Fiat price.">
+        <label for="buyValueFiat">Fiat value</label>
+        <input v-model="coin.buyValueFiat" id="buyValueFiat" placeholder="Enter the buy Fiat value.">
       </li>
       <li class="form-row">
         <label for="amount">Amount</label>

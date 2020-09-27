@@ -16,13 +16,14 @@
         <!-- <caption>Statement Summary</caption> -->
         <thead>
             <tr>
-              <th scope="col" class="column-left">Name</th>
+              <th scope="col" class="column-name">Name</th>
               <th scope="col">Buy price (Fiat)</th>
               <th scope="col">Buy price (USD)</th>
               <th scope="col">Current price (USD)</th>
               <th scope="col">Allocation</th>
               <th scope="col">Amount</th>
-              <th scope="col">Buy value</th>
+              <th scope="col">Buy value (Fiat)</th>
+              <th scope="col">Buy value (USD)</th>
               <th scope="col">Current Value</th>
               <th scope="col" class='gainloss'>Gain / Loss</th>
               <th scope="col">Actions</th>
@@ -30,15 +31,16 @@
         </thead>
         <tbody>
             <tr v-for="myCoin in myCoins" :key="myCoin.id">
-              <td data-label="Name" class="column-left">{{ myCoin.name }}</td>
-              <td data-label="Buy price (Fiat)">{{ myCoin.fiat }} {{ toFixed(myCoin.buyPriceFiat) }}</td>
+              <td data-label="Name" class="column-name">{{ myCoin.name }}</td>
+              <td data-label="Buy price (Fiat)">{{ toFixed(myCoin.buyPriceFiat) }}</td>
               <td data-label="Buy price (USD)">{{`$`}} {{ toFixed(myCoin.buyPriceUSD) }}</td>
               <td :style="{backgroundColor:myCoin.currentPriceColor}"
                   data-label="Current price">{{`$`}} {{ toFixed(myCoin.currentPrice) }}
               </td>
               <td data-label="Allocation">{{ toFixedPercent(myCoin.allocation) }} {{`%`}}</td>
               <td data-label="Amount">{{ toFixed(myCoin.amount) }}</td>
-              <td data-label="Buy Value">{{`$`}} {{ toFixed(myCoin.buyValue) }}</td>
+              <td data-label="Buy Value (Fiat)">{{ myCoin.fiat }} {{ toFixed(myCoin.buyValueFiat) }}</td>
+              <td data-label="Buy Value (USD)">{{`$`}} {{ toFixed(myCoin.buyValueUSD) }}</td>
               <td data-label="Current Value">{{`$`}} {{ toFixed(myCoin.currentValue) }}</td>
               <td data-label="Gain/Loss"
                 :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? 'red' : 'navy'}">
@@ -83,7 +85,8 @@ export default {
       'loadMyCoins',
       'deleteCoin',
       'loadPrices',
-      'loadFiat'
+      'loadFiat',
+      'loadTickers'
     ]),
     add () {
       this.coin = {}
@@ -111,6 +114,7 @@ export default {
     await this.loadFiat()
     await this.loadMyCoins()
     await this.loadPrices()
+    await this.loadTickers()
   },
   computed: {
     ...mapGetters({
@@ -129,7 +133,6 @@ export default {
   padding-top: 68px;
   font-weight: 100;
   text-align: center;
-
 }
 
 h1 {
@@ -163,15 +166,15 @@ table td {
   text-align: right;
 }
 
-.column-left {
-  padding-left: 1.625em;
-  text-align: left;
-}
-
 table th {
   font-size: .85em;
   letter-spacing: .1em;
   text-transform: uppercase;
+}
+
+.column-name {
+  padding-left: 1.625em;
+  text-align: left;
 }
 
 .gainloss {
@@ -228,6 +231,10 @@ table th {
 
   table td:last-child {
     border-bottom: 0;
+  }
+  .column-name {
+    padding-left: .625em;
+    text-align: right;
   }
 }
 

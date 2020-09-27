@@ -68,7 +68,7 @@ const actions = {
     let totalBuyValue = 0
     state.myCoins.forEach(c => {
       assets.push(c.name.toLowerCase())
-      totalBuyValue += +(c.buyPriceFiat * c.amount)
+      totalBuyValue += +c.buyValueFiat
       c.currentPrice = 0
       c.currentValue = 0
       c.gainLoss = 0
@@ -86,7 +86,8 @@ const actions = {
           const coin = state.myCoins.find(c => c.name.toLowerCase() === asset)
           if (!JSON.parse(msg.data)[asset]) return
 
-          coin.buyPriceUSD = coin.buyPriceFiat / state.fiat.rates[coin.fiat]
+          coin.buyPriceFiat = (coin.buyValueFiat / coin.amount)
+          coin.buyPriceUSD = (coin.buyValueFiat / coin.amount) / state.fiat.rates[coin.fiat]
           coin.currentPriceColor =
             parseFloat(coin.currentPrice).toFixed(coin.currentPrice > 1 ? 2 : 5) >
               parseFloat(JSON.parse(msg.data)[asset]).toFixed(coin.currentPrice > 1 ? 2 : 5)
@@ -97,8 +98,8 @@ const actions = {
                 : '#f8f8f8'
           coin.currentPrice = JSON.parse(msg.data)[asset]
           coin.currentValue = JSON.parse(msg.data)[asset] * coin.amount
-          coin.allocation = (+(coin.buyPriceFiat * coin.amount) * 100) / totalBuyValue
-          coin.buyValue = coin.buyPriceFiat * coin.amount / state.fiat.rates[coin.fiat]
+          coin.allocation = coin.buyValueFiat / totalBuyValue * 100
+          coin.buyValueUSD = coin.buyValueFiat / state.fiat.rates[coin.fiat]
           coin.gainLoss = coin.currentValue - (coin.buyPriceFiat * coin.amount / state.fiat.rates[coin.fiat])
           coin.gainLossPercent =
             ((coin.currentValue / (coin.buyPriceFiat * coin.amount / state.fiat.rates[coin.fiat])) * 100) - 100
