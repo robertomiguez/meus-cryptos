@@ -26,8 +26,6 @@ export default {
    position: fixed;
    bottom: 0;
    width: 100%;
-   background-color: #f0f8ce;
-   color: #201f1f;
    text-align: center;
    height: 30px;
 

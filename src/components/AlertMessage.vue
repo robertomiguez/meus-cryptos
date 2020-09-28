@@ -1,12 +1,18 @@
 <template>
-    <div class="alert success"
+    <div class="alert"
         :style="{backgroundColor:
             messageType == 'error' ? '#f44336' :
             messageType == 'warning' ? '#ff9800' :
             messageType == 'info' ? '#2196F3' :
             messageType == 'success' ? '#4CAF50' : '#FFF'}">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>{{messageType}}!</strong> {{description}}
+        <span :style="{backgroundColor:
+            messageType == 'error' ? '#f44336' :
+            messageType == 'warning' ? '#ff9800' :
+            messageType == 'info' ? '#2196F3' :
+            messageType == 'success' ? '#4CAF50' : '#FFF'}"
+            class="closebtn" onclick="this.parentElement.style.display='none';">&times;
+        </span>
+        {{messageType}}! {{description}}
     </div>
 </template>
 
@@ -45,6 +51,6 @@ export default {
 }
 
 .closebtn:hover {
-  color: black;
+  color: #333;
 }
 </style>

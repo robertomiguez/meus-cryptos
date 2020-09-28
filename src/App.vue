@@ -39,7 +39,9 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
+  font-family: monospace;
   vertical-align: baseline;
+  background-color: #000;
 }
 
 #app {
@@ -47,6 +49,6 @@ time, mark, audio, video {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #446285;
 }
 </style>

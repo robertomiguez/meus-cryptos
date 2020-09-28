@@ -1,5 +1,10 @@
 <template>
   <div class="main">
+    <AlertMessage
+      v-show="Object.keys(message).length"
+      :description="message.description"
+      :messageType="message.messageType"
+    />
     <FormMyCoin
       :coin='coin'
       :fiatNames='fiatNames'
@@ -25,36 +30,43 @@
               <th scope="col">Buy value (Fiat)</th>
               <th scope="col">Buy value (USD)</th>
               <th scope="col">Current Value</th>
-              <th scope="col" class='gainloss'>Gain / Loss</th>
+              <th scope="col" class='gainloss'>Gain/Loss</th>
               <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="myCoin in myCoins" :key="myCoin.id">
               <td data-label="Name" class="column-name">{{ myCoin.name }}</td>
-              <td data-label="Buy price (Fiat)">{{ toFixed(myCoin.buyPriceFiat) }}</td>
-              <td data-label="Buy price (USD)">{{`$`}} {{ toFixed(myCoin.buyPriceUSD) }}</td>
+              <td data-label="Buy price (Fiat)">
+                <span class="smallfiat">{{ myCoin.fiat }}</span>
+                {{ toFixed(myCoin.buyPriceFiat) }}
+              </td>
+              <td data-label="Buy price (USD)">{{`$`}} {{ toFixed(myCoin.buyPriceUSD) }}
+              </td>
               <td :style="{backgroundColor:myCoin.currentPriceColor}"
                   data-label="Current price">{{`$`}} {{ toFixed(myCoin.currentPrice) }}
               </td>
               <td data-label="Allocation">{{ toFixedPercent(myCoin.allocation) }} {{`%`}}</td>
               <td data-label="Amount">{{ toFixed(myCoin.amount) }}</td>
-              <td data-label="Buy Value (Fiat)">{{ myCoin.fiat }} {{ toFixed(myCoin.buyValueFiat) }}</td>
+              <td data-label="Buy Value (Fiat)">
+                <span class="smallfiat">{{ myCoin.fiat }}</span>
+                {{ toFixed(myCoin.buyValueFiat) }}
+              </td>
               <td data-label="Buy Value (USD)">{{`$`}} {{ toFixed(myCoin.buyValueUSD) }}</td>
               <td data-label="Current Value">{{`$`}} {{ toFixed(myCoin.currentValue) }}</td>
               <td data-label="Gain/Loss"
-                :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? 'red' : 'navy'}">
+                :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? '#a56361' : '#3e5672'}">
                 {{`$`}} {{ toFixed(myCoin.gainLoss) }} ({{ toFixedPercent(myCoin.gainLossPercent) }}%)
               </td>
               <td data-label="Actions">
                 <font-awesome-icon
                   :icon="{ prefix: 'fas', iconName: 'edit' }"
-                  @click="upt(myCoin)"
+                  @click.prevent="upt(myCoin)"
                   class='icon'
                 />
                 <font-awesome-icon
                   :icon="{ prefix: 'fas', iconName: 'trash-alt' }"
-                  @click="del(myCoin)"
+                  @click.prevent="del(myCoin)"
                   class='icon'
                 />
               </td>
@@ -67,11 +79,13 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import FormMyCoin from '../components/FormMyCoin.vue'
+import AlertMessage from '../components/AlertMessage'
 
 export default {
   name: 'MyCoins',
   components: {
-    FormMyCoin
+    FormMyCoin,
+    AlertMessage
   },
   data: function () {
     return {
@@ -120,8 +134,9 @@ export default {
     ...mapGetters({
       myCoins: 'getMyCoins',
       fiatNames: 'getFiatNames',
-      cryptoNames: 'getCryptoNames'
+      cryptoNames: 'getCryptoNames',
       // fiatRate: 'getFiatRate'
+      message: 'getMessage'
     })
   }
 }
@@ -155,19 +170,18 @@ table caption {
 }
 
 table tr {
-  background-color: #f8f8f8;
   border: 1px solid #ddd;
   padding: .35em;
 }
 
 table th,
 table td {
+  font-size: 1em;
   padding: .625em;
   text-align: right;
 }
 
 table th {
-  font-size: .85em;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -183,6 +197,11 @@ table th {
 
 .icon {
   padding: 2px;
+}
+
+.smallfiat {
+  font-size: 10px;
+  font-weight: 800;
 }
 
 @media screen and (max-width: 600px) {

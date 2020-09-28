@@ -1,6 +1,10 @@
 <template>
   <div class="wrapper">
-    <AlertMessage v-show="message" :description="message.description" :messageType="message.messageType"/>
+    <AlertMessage
+      v-show="Object.keys(message).length"
+      :description="message.description"
+      :messageType="message.messageType"
+    />
     <div class="main">
       <h1>Updated every 20 seconds. ({{ minutes }} seconds left)</h1>
       <table>
@@ -26,7 +30,7 @@
                 <td data-label="VWAP (24Hr)">{{`$`}}{{ toFixed(ticker.vwap24Hr) }}</td>
                 <td data-label="Supply">{{ toFixedMarket(ticker.supply) }}</td>
                 <td data-label="Volume (24Hr)">{{`$`}}{{ toFixedMarket(ticker.volumeUsd24Hr) }}</td>
-                <td data-label="Change (24Hr)" :style="{color: ticker.changePercent24Hr < 0 ? 'red' : 'navy'}">
+                <td data-label="Change (24Hr)" :style="{color: ticker.changePercent24Hr < 0 ? '#a56361' : '#3e5672'}">
                   {{ toFixedPercent(ticker.changePercent24Hr) }} %</td>
               </tr>
           </tbody>
@@ -103,15 +107,15 @@ export default {
 
 .main {
   text-align: center;
-  background: #fff;
+  /* background: #fff; */
 }
 
 .aside-1 {
-  background: #fff;
+  /* background: #fff; */
 }
 
 .aside-2 {
-  background: #fff;
+  /* background: #fff; */
 }
 
 h1 {
@@ -129,7 +133,6 @@ table {
 }
 
 table tr {
-  background-color: #f8f8f8;
   border: 1px solid #ddd;
   padding: .35em;
 }

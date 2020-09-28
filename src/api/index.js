@@ -9,7 +9,7 @@ export const fetchDataCoincap = async () => {
 }
 
 export const fetchDataForex = async () => {
-  const res = await fetch('https://api.openrates.io/latest?base=USD&symbols=USD,GBP,EUR,BRL', {
+  const res = await fetch('https://api.openrates.io/latest?base=USD&symbols=GBP,EUR,BRL', {
     headers: {
       Accept: 'application/json'
     }

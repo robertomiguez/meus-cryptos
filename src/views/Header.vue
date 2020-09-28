@@ -5,8 +5,8 @@
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
       <ul class="menu">
-        <li><router-link to='/'>Home</router-link></li>
-        <li><router-link to='/mycoins'>My positions</router-link></li>
+        <li><router-link to='/'>My positions</router-link></li>
+        <li><router-link to='/allcoins'>All coins</router-link></li>
       </ul>
     </header>
   </div>
@@ -21,13 +21,12 @@ export default {
 <style scoped>
 
 a {
-  color: #000;
+  color: ghostwhite;
 }
 
 /* header */
 
 .header {
-  background-color: #f0f8ce;
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: fixed;
   width: 100%;
@@ -39,7 +38,6 @@ a {
   padding: 0;
   list-style: none;
   overflow: hidden;
-  background-color: #f0f8ce;
 }
 
 .header li a {
@@ -51,7 +49,7 @@ a {
 
 .header li a:hover,
 .header .menu-btn:hover {
-  background-color: #f4f4f4;
+  background-color: #333;
 }
 
 .header .logo {

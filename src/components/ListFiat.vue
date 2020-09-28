@@ -74,6 +74,7 @@ img {
 .rate-date-label {
   font-size: 13px;
   font-family: fantasy;
+  margin-top: 40px;
 }
 
 .rate-date-value {

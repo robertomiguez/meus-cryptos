@@ -79,7 +79,7 @@ const actions = {
       state.pricesWs = new WebSocket(`wss://ws.coincap.io/prices?assets=${assets.toString()}`)
       state.pricesWs.onmessage = msg => {
         state.myCoins.forEach(c => {
-          c.currentPriceColor = '#f8f8f8'
+          c.currentPriceColor = '#000'
         })
         // console.log(msg)
         assets.forEach(asset => {
@@ -95,7 +95,7 @@ const actions = {
               : parseFloat(coin.currentPrice).toFixed(coin.currentPrice > 1 ? 2 : 5) <
                 parseFloat(JSON.parse(msg.data)[asset]).toFixed(coin.currentPrice > 1 ? 2 : 5)
                 ? '#90EE90'
-                : '#f8f8f8'
+                : '#000'
           coin.currentPrice = JSON.parse(msg.data)[asset]
           coin.currentValue = JSON.parse(msg.data)[asset] * coin.amount
           coin.allocation = coin.buyValueFiat / totalBuyValue * 100
