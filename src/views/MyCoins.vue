@@ -80,6 +80,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import FormMyCoin from '../components/FormMyCoin.vue'
 import AlertMessage from '../components/AlertMessage'
+import uuid from 'uuid'
 
 export default {
   name: 'MyCoins',
@@ -103,7 +104,7 @@ export default {
       'loadTickers'
     ]),
     add () {
-      this.coin = {}
+      this.coin = { id: uuid.v4() }
       this.updateMode(true)
     },
     upt (coin) {

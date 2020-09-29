@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
         <div class="follow">
-            Test version | Powered by CoinCap API | Follow me:
+            Powered by CoinCap API | Follow me:
             <font-awesome-icon
               :icon="{ prefix: 'fab', iconName: 'linkedin' }"
               @click="openUrl('https://linkedin.com/in/miguezr')"
