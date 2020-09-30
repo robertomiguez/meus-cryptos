@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import AllCoins from '../views/AllCoins.vue'
+import HowTo from '../views/HowTo.vue'
 import MyCoins from '../views/MyCoins.vue'
+import AllCoins from '../views/AllCoins.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/howto',
+    name: 'HowTo',
+    component: HowTo
+  },
   {
     path: '/',
     name: 'MyCoins',

@@ -10,6 +10,9 @@ exports[`Header renders the component 1`] = `
       <li>
         <router-link-stub to="/allcoins">All coins</router-link-stub>
       </li>
+      <li>
+        <router-link-stub to="/howto">Help ?</router-link-stub>
+      </li>
     </ul>
   </header>
 </div>
