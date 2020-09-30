@@ -1,6 +1,7 @@
 <template>
     <div>
-      <div class='rate-date-label'>Rate Fiat Date:</div> <div class='rate-date-value'>{{ fiatRate.date }}</div>
+      <div class='rate-date-label'>Fiat rates from openrates.io in </div>
+      <div class='rate-date-value'>{{ fiatRate.date }}</div>
       <div v-for="(value, name, index) in fiatRate.rates" :key="index">
         <div class="card">
             <img :src="require(`../assets/${name.toLowerCase()}.png`)">

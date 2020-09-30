@@ -1,10 +1,11 @@
 <template>
     <div class="card">
-        <h2>Donation</h2>
+        <div class="donation">Donation</div>
         <img src="@/assets/btcaddress.jpg" alt="Avatar" style="width:100%">
         <div class="container">
-            <h4><b>My Bitcoin address</b></h4>
-            <div>{{btcAddress.slice(0,10)}}...
+            <div>My Bitcoin address</div>
+            <div class="address">
+                {{btcAddress.slice(0,10)}}...
                 <button class="unstyled-button"
                     v-clipboard:copy="btcAddress">
                     <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'copy'}" size="2x" style="color: gray;"/>
@@ -40,8 +41,16 @@ export default {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.donation {
+  padding-bottom: .5em;
+}
+
 .container {
-  padding: 0px;
+  padding: .5em;
+}
+
+.address {
+  padding: .5em;
 }
 
 .unstyled-button {

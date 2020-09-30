@@ -18,7 +18,7 @@
         @click="add()"/>
     </h1>
     <table v-show="myCoins.length && !formVisible">
-        <!-- <caption>Statement Summary</caption> -->
+        <!-- <caption>Crypto List</caption> -->
         <thead>
             <tr>
               <th scope="col" class="column-name">Name</th>
@@ -73,6 +73,7 @@
             </tr>
         </tbody>
     </table>
+    <div class="hint">All USD prices are calculated using rate from openrates.io in {{ fiatRateDate }}</div>
   </div>
 </template>
 
@@ -137,6 +138,7 @@ export default {
       fiatNames: 'getFiatNames',
       cryptoNames: 'getCryptoNames',
       // fiatRate: 'getFiatRate'
+      fiatRateDate: 'getFiatRateDate',
       message: 'getMessage'
     })
   }
@@ -202,6 +204,10 @@ table th {
 .smallfiat {
   font-size: 10px;
   font-weight: 800;
+}
+
+.hint {
+  padding: .625em;
 }
 
 @media screen and (max-width: 600px) {

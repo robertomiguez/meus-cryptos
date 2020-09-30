@@ -2,21 +2,21 @@
     <div class="main">
         <div class="title">Keep track of your cryptos</div>
         <div class="step">First step - Push add button. </div>
-        <div><img src="@/assets/step1.jpg" style="width:20%"></div>
+        <div><img src="@/assets/step1.jpg"></div>
         <div class="step">Second step - Fill the form</div>
-        <div><img src="@/assets/step2.jpg" style="width:20%"></div>
-        <div class="step">Third step - Crypto list with original fiat and USD*</div>
-        <div><img src="@/assets/step3.jpg" style="width:20%"></div>
+        <div><img src="@/assets/step2.jpg"></div>
+        <div class="step">Third step - Crypto list</div>
+        <div><img src="@/assets/step3.jpg"></div>
     </div>
 </template>
 
 <script>
 export default {
-
+  name: 'HowTo'
 }
 </script>
 
-<style>
+<style scoped>
 .main {
   text-align: center;
   padding-top: 10em;
@@ -28,6 +28,7 @@ export default {
 }
 img {
   margin-bottom: 3em;
+  width: 25%;
 }
 .step {
   padding: 1.5em 0;
@@ -38,6 +39,9 @@ img {
   }
   .title {
     font-size: 1.3em
+  }
+  img {
+    width: 90%;
   }
 }
 </style>

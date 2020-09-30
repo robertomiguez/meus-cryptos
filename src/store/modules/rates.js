@@ -160,6 +160,9 @@ const getters = {
   getFiatNames (state) {
     return Object.keys(state.fiat.rates)
   },
+  getFiatRateDate (state) {
+    return state.fiat.date
+  },
   getMyCoins (state) {
     return state.myCoins
   },
