@@ -97,7 +97,6 @@ export default {
 .wrapper {
   display: flex;
   flex-flow: row wrap;
-  font-weight: 100;
   text-align: center;
   padding: 68px 0px 30px 0px;
 }

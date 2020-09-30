@@ -147,7 +147,6 @@ export default {
 .main {
   text-align: center;
   padding-top: 68px;
-  font-weight: 100;
   text-align: center;
 }
 

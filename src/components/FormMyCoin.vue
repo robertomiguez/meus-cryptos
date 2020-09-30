@@ -67,11 +67,14 @@ export default {
 <style scoped>
   .wrapper {
     list-style-type: none;
-    padding: 20px;
-    margin: 2px;
+    padding: 10px;
     border-radius: 3px;
-    margin: 0 40%;
     border: solid;
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .form-row {
     display: flex;
@@ -98,9 +101,10 @@ export default {
   }
  @media screen and (max-width: 768px) {
     .wrapper {
-      margin: 0;
     }
-    .form-row > input {
+    .form-row > input
+    .form-row > select
+    .form-row > button {
     flex: 3;
    }
   }
