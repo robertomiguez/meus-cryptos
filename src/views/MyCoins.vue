@@ -17,63 +17,65 @@
         :icon="{ prefix: 'fas', iconName: 'plus-square' }"
         @click="add()"/>
     </h1>
-    <table v-show="myCoins.length && !formVisible">
-        <!-- <caption>Crypto List</caption> -->
-        <thead>
-            <tr>
-              <th scope="col" class="column-name">Name</th>
-              <th scope="col">Buy price (Fiat)</th>
-              <th scope="col">Buy price (USD)</th>
-              <th scope="col">Current price (USD)</th>
-              <th scope="col">Allocation</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Buy value (Fiat)</th>
-              <th scope="col">Buy value (USD)</th>
-              <th scope="col">Current Value</th>
-              <th scope="col" class='gainloss'>Gain/Loss</th>
-              <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="myCoin in myCoins" :key="myCoin.id">
-              <td data-label="Name" class="column-name">{{ myCoin.name }}</td>
-              <td data-label="Buy price (Fiat)">
-                <span class="smallfiat">{{ myCoin.fiat }}</span>
-                {{ toFixed(myCoin.buyPriceFiat) }}
-              </td>
-              <td data-label="Buy price (USD)">{{`$`}} {{ toFixed(myCoin.buyPriceUSD) }}
-              </td>
-              <td :style="{backgroundColor:myCoin.currentPriceColor}"
-                  data-label="Current price">{{`$`}} {{ toFixed(myCoin.currentPrice) }}
-              </td>
-              <td data-label="Allocation">{{ toFixedPercent(myCoin.allocation) }} {{`%`}}</td>
-              <td data-label="Amount">{{ toFixed(myCoin.amount) }}</td>
-              <td data-label="Buy Value (Fiat)">
-                <span class="smallfiat">{{ myCoin.fiat }}</span>
-                {{ toFixed(myCoin.buyValueFiat) }}
-              </td>
-              <td data-label="Buy Value (USD)">{{`$`}} {{ toFixed(myCoin.buyValueUSD) }}</td>
-              <td data-label="Current Value">{{`$`}} {{ toFixed(myCoin.currentValue) }}</td>
-              <td data-label="Gain/Loss"
-                :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? '#a56361' : '#3e5672'}">
-                {{`$`}} {{ toFixed(myCoin.gainLoss) }} ({{ toFixedPercent(myCoin.gainLossPercent) }}%)
-              </td>
-              <td data-label="Actions">
-                <font-awesome-icon
-                  :icon="{ prefix: 'fas', iconName: 'edit' }"
-                  @click.prevent="upt(myCoin)"
-                  class='icon'
-                />
-                <font-awesome-icon
-                  :icon="{ prefix: 'fas', iconName: 'trash-alt' }"
-                  @click.prevent="del(myCoin)"
-                  class='icon'
-                />
-              </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="hint">All USD prices are calculated using rate from openrates.io in {{ fiatRateDate }}</div>
+    <div v-show="myCoins.length && !formVisible">
+      <table>
+          <!-- <caption>Crypto List</caption> -->
+          <thead>
+              <tr>
+                <th scope="col" class="column-name">Name</th>
+                <th scope="col">Buy price (Fiat)</th>
+                <th scope="col">Buy price (USD)</th>
+                <th scope="col">Current price (USD)</th>
+                <th scope="col">Allocation</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Buy value (Fiat)</th>
+                <th scope="col">Buy value (USD)</th>
+                <th scope="col">Current Value</th>
+                <th scope="col" class='gainloss'>Gain/Loss</th>
+                <th scope="col">Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr v-for="myCoin in myCoins" :key="myCoin.id">
+                <td data-label="Name" class="column-name">{{ myCoin.name }}</td>
+                <td data-label="Buy price (Fiat)">
+                  <span class="smallfiat">{{ myCoin.fiat }}</span>
+                  {{ toFixed(myCoin.buyPriceFiat) }}
+                </td>
+                <td data-label="Buy price (USD)">{{`$`}} {{ toFixed(myCoin.buyPriceUSD) }}
+                </td>
+                <td :style="{backgroundColor:myCoin.currentPriceColor}"
+                    data-label="Current price">{{`$`}} {{ toFixed(myCoin.currentPrice) }}
+                </td>
+                <td data-label="Allocation">{{ toFixedPercent(myCoin.allocation) }} {{`%`}}</td>
+                <td data-label="Amount">{{ toFixed(myCoin.amount) }}</td>
+                <td data-label="Buy Value (Fiat)">
+                  <span class="smallfiat">{{ myCoin.fiat }}</span>
+                  {{ toFixed(myCoin.buyValueFiat) }}
+                </td>
+                <td data-label="Buy Value (USD)">{{`$`}} {{ toFixed(myCoin.buyValueUSD) }}</td>
+                <td data-label="Current Value">{{`$`}} {{ toFixed(myCoin.currentValue) }}</td>
+                <td data-label="Gain/Loss"
+                  :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? '#a56361' : '#3e5672'}">
+                  {{`$`}} {{ toFixed(myCoin.gainLoss) }} ({{ toFixedPercent(myCoin.gainLossPercent) }}%)
+                </td>
+                <td data-label="Actions">
+                  <font-awesome-icon
+                    :icon="{ prefix: 'fas', iconName: 'edit' }"
+                    @click.prevent="upt(myCoin)"
+                    class='icon'
+                  />
+                  <font-awesome-icon
+                    :icon="{ prefix: 'fas', iconName: 'trash-alt' }"
+                    @click.prevent="del(myCoin)"
+                    class='icon'
+                  />
+                </td>
+              </tr>
+          </tbody>
+      </table>
+      <div class="hint">All USD prices are calculated using rate from openrates.io in {{ fiatRateDate }}</div>
+    </div>
   </div>
 </template>
 

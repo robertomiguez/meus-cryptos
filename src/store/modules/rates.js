@@ -53,8 +53,8 @@ const actions = {
       // do not save calculate/external fields
       const
         {
-          buyPriceUSD, allocation, currentPrice, currentPriceColor,
-          currentValue, buyValue, gainLoss, gainLossPercent, ...tmpCoin
+          buyPriceFiat, buyPriceUSD, allocation, currentPrice, currentPriceColor,
+          currentValue, buyValueUSD, gainLoss, gainLossPercent, ...tmpCoin
         } = coin
       await idb.saveCoin(tmpCoin)
       commit('ADD_COIN', tmpCoin)
@@ -106,7 +106,7 @@ const actions = {
           const index = state.myCoins.findIndex(c => c.id === coin.id)
           if (index !== -1) state.myCoins.splice(index, 1, coin)
         })
-        // state.myCoins.sort((a, b) => (+a.allocation < +b.allocation) ? 1 : -1)
+        state.myCoins.sort((a, b) => (+a.buyValueFiat < +b.buyValueFiat) ? 1 : -1)
       }
     } catch (error) {
       commit('SET_MESSAGE', { messageType: 'error', description: `Error on loading prices. ${error}` })
