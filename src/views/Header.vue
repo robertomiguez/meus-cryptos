@@ -7,6 +7,7 @@
       <ul class="menu">
         <li><router-link to='/'>My positions</router-link></li>
         <li><router-link to='/allcoins'>All coins</router-link></li>
+        <li><router-link to='/supportedcryptos'>Supported Cryptos</router-link></li>
         <li><router-link to='/howto'>Help ?</router-link></li>
       </ul>
     </header>
