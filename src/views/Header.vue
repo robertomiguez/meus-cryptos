@@ -1,7 +1,8 @@
 <template>
   <div>
     <header class="header">
-      <a href="" class="logo">Meus Cryptos</a>
+      <a href="" class="title">Meus Cryptos</a>
+      <img class="logo" src="@/assets/squirrel.png" alt="Avatar" style="width:2.0%">
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
       <ul class="menu">
@@ -54,11 +55,18 @@ a {
   background-color: #333;
 }
 
-.header .logo {
+.header .title {
   display: block;
   float: left;
   font-size: 2em;
-  padding: 10px 20px;
+  padding: 15px 10px;
+  text-decoration: none;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  padding: 5px 0px;
   text-decoration: none;
 }
 
