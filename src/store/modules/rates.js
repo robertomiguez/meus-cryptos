@@ -101,8 +101,7 @@ const actions = {
           coin.allocation = coin.buyValueFiat / totalBuyValue * 100
           coin.buyValueUSD = coin.buyValueFiat / state.fiat.rates[coin.fiat]
           coin.gainLoss = coin.currentValue - (coin.buyPriceFiat * coin.amount / state.fiat.rates[coin.fiat])
-          coin.gainLossPercent =
-            ((coin.currentValue / (coin.buyPriceFiat * coin.amount / state.fiat.rates[coin.fiat])) * 100) - 100
+          coin.gainLossPercent = ((coin.currentValue / (coin.buyPriceUSD * coin.amount)) * 100) - 100
           const index = state.myCoins.findIndex(c => c.id === coin.id)
           if (index !== -1) state.myCoins.splice(index, 1, coin)
         })
