@@ -2,7 +2,7 @@
   <div>
     <header class="header">
       <a href="" class="title">Meus Cryptos</a>
-      <img class="logo" src="@/assets/squirrel.png" alt="Avatar" style="width:2.0%">
+      <img class="logo" src="@/assets/squirrel.png">
       <input class="menu-btn" type="checkbox" id="menu-btn" />
       <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
       <ul class="menu">
@@ -58,16 +58,16 @@ a {
 .header .title {
   display: block;
   float: left;
-  font-size: 2em;
-  padding: 15px 10px;
+  font-size: 1.5em;
+  padding: 18px 10px;
   text-decoration: none;
 }
 
 .header .logo {
   display: block;
   float: left;
-  padding: 5px 0px;
-  text-decoration: none;
+  padding: 13px 0px;
+  width: 2em;
 }
 
 /* menu */
@@ -160,6 +160,14 @@ a {
   }
   .header .menu-icon {
     display: none;
+  }
+  .header .title {
+    font-size: 2em;
+    padding: 13px 10px;
+  }
+  .header .logo {
+    width: 3em;
+    padding: 5px 0px;
   }
 }
 

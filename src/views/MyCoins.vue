@@ -32,7 +32,7 @@
                 <th scope="col">Buy value (USD)</th>
                 <th scope="col">Current Value</th>
                 <th scope="col" class='gainloss'>Gain/Loss</th>
-                <th scope="col">Actions</th>
+                <th scope="col"></th>
               </tr>
           </thead>
           <tbody>
@@ -42,10 +42,10 @@
                   <span class="smallfiat">{{ myCoin.fiat }}</span>
                   {{ toFixed(myCoin.buyPriceFiat) }}
                 </td>
-                <td data-label="Buy price (USD)">{{`$`}} {{ toFixed(myCoin.buyPriceUSD) }}
+                <td data-label="Buy price (USD)">{{`$`}}{{ toFixed(myCoin.buyPriceUSD) }}
                 </td>
                 <td :style="{backgroundColor:myCoin.currentPriceColor}"
-                    data-label="Current price">{{`$`}} {{ toFixed(myCoin.currentPrice) }}
+                    data-label="Current price">{{`$`}}{{ toFixed(myCoin.currentPrice) }}
                 </td>
                 <td data-label="Allocation">{{ toFixedPercent(myCoin.allocation) }} {{`%`}}</td>
                 <td data-label="Amount">{{ toFixed(myCoin.amount) }}</td>
@@ -53,11 +53,11 @@
                   <span class="smallfiat">{{ myCoin.fiat }}</span>
                   {{ toFixed(myCoin.buyValueFiat) }}
                 </td>
-                <td data-label="Buy Value (USD)">{{`$`}} {{ toFixed(myCoin.buyValueUSD) }}</td>
-                <td data-label="Current Value">{{`$`}} {{ toFixed(myCoin.currentValue) }}</td>
+                <td data-label="Buy Value (USD)">{{`$`}}{{ toFixed(myCoin.buyValueUSD) }}</td>
+                <td data-label="Current Value">{{`$`}}{{ toFixed(myCoin.currentValue) }}</td>
                 <td data-label="Gain/Loss"
                   :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? '#a56361' : '#3e5672'}">
-                  {{`$`}} {{ toFixed(myCoin.gainLoss) }} ({{ toFixedPercent(myCoin.gainLossPercent) }}%)
+                  {{`$`}}{{ toFixed(myCoin.gainLoss) }} ({{ toFixedPercent(myCoin.gainLossPercent) }}%)
                 </td>
                 <td data-label="Actions">
                   <font-awesome-icon
@@ -196,7 +196,7 @@ table th {
 }
 
 .gainloss {
-  width: 200px;
+  width: 150px;
 }
 
 .icon {
@@ -212,7 +212,7 @@ table th {
   padding: .625em;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1400px) {
   table {
     border: 0;
   }
