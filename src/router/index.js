@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HowTo from '../views/HowTo.vue'
 import MyCoins from '../views/MyCoins.vue'
-import AllCoins from '../views/AllCoins.vue'
-import SupportedCryptos from '../views/SupportedCryptos'
 
 Vue.use(VueRouter)
 
@@ -11,7 +8,7 @@ const routes = [
   {
     path: '/howto',
     name: 'HowTo',
-    component: HowTo
+    component: () => import('../views/HowTo.vue')
   },
   {
     path: '/',
@@ -21,12 +18,12 @@ const routes = [
   {
     path: '/allcoins',
     name: 'AllCoins',
-    component: AllCoins
+    component: () => import('../views/AllCoins.vue')
   },
   {
     path: '/supportedcryptos',
     name: 'SupportedCryptos',
-    component: SupportedCryptos
+    component: () => import('../views/SupportedCryptos.vue')
   },
   {
     path: '/about',
