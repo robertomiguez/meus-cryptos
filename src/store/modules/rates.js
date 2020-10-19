@@ -160,7 +160,8 @@ const getters = {
     return Object.keys(state.fiat.rates)
   },
   getFiatRateDate (state) {
-    return state.fiat.date
+    const [year, month, day] = state.fiat.date.split('-')
+    return `${day}-${month}-${year}`
   },
   getMyCoins (state) {
     return state.myCoins

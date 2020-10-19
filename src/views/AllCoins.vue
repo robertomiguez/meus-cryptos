@@ -30,7 +30,7 @@
                 <td data-label="VWAP (24Hr)">{{`$`}}{{ toFixed(ticker.vwap24Hr) }}</td>
                 <td data-label="Supply">{{ toFixedMarket(ticker.supply) }}</td>
                 <td data-label="Volume (24Hr)">{{`$`}}{{ toFixedMarket(ticker.volumeUsd24Hr) }}</td>
-                <td data-label="Change (24Hr)" :style="{color: ticker.changePercent24Hr < 0 ? '#a56361' : '#3e5672'}">
+                <td data-label="Change (24Hr)" :style="{color: ticker.changePercent24Hr < 0 ? '#a56361' : '#7596bd'}">
                   {{ toFixedPercent(ticker.changePercent24Hr) }} %</td>
               </tr>
           </tbody>
@@ -46,9 +46,11 @@ import { mapActions, mapGetters } from 'vuex'
 import BtcDonation from '../components/BtcDonation'
 import ListFiat from '../components/ListFiat'
 import AlertMessage from '../components/AlertMessage'
+import { util } from '../mixins/util'
 
 export default {
   name: 'AllCoins',
+  mixins: [util],
   components: {
     BtcDonation,
     ListFiat,
@@ -62,18 +64,7 @@ export default {
   methods: {
     ...mapActions([
       'loadTickers'
-    ]),
-    toFixedMarket: num => {
-      return num > 1000000000 ? parseFloat(num / 1000000000).toFixed(2) + 'B'
-        : num > 1000000 ? parseFloat(num / 1000000).toFixed(2) + 'M'
-          : parseFloat(num / 1000).toFixed(2) + 'K'
-    },
-    toFixed: num => {
-      return parseFloat(num).toFixed(num > 1 ? 2 : 5)
-    },
-    toFixedPercent: num => {
-      return parseFloat(num).toFixed(2)
-    }
+    ])
   },
   mounted () {
     this.loadTickers()

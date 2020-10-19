@@ -49,6 +49,6 @@ time, mark, audio, video {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #446285;
+  color: #7596bd;
 }
 </style>

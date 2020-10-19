@@ -56,7 +56,7 @@
                 <td data-label="Buy Value (USD)">{{`$`}}{{ toFixed(myCoin.buyValueUSD) }}</td>
                 <td data-label="Current Value">{{`$`}}{{ toFixed(myCoin.currentValue) }}</td>
                 <td data-label="Gain/Loss"
-                  :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? '#a56361' : '#3e5672'}">
+                  :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? '#a56361' : '#7596bd'}">
                   {{`$`}}{{ toFixed(myCoin.gainLoss) }} ({{ toFixedPercent(myCoin.gainLossPercent) }}%)
                 </td>
                 <td data-label="Actions">
@@ -74,7 +74,9 @@
               </tr>
           </tbody>
       </table>
-      <div class="hint">All USD prices are calculated using rate from openrates.io in {{ fiatRateDate }}</div>
+      <div class="hint">All USD prices are calculated using rate from openrates.io in
+        {{ fiatRateDate }} at around 4:00pm CET
+      </div>
     </div>
   </div>
 </template>
@@ -84,9 +86,11 @@ import { mapActions, mapGetters } from 'vuex'
 import FormMyCoin from '../components/FormMyCoin.vue'
 import AlertMessage from '../components/AlertMessage'
 import uuid from 'uuid'
+import { util } from '../mixins/util'
 
 export default {
   name: 'MyCoins',
+  mixins: [util],
   components: {
     FormMyCoin,
     AlertMessage
@@ -119,13 +123,6 @@ export default {
     },
     updateMode (visible) {
       this.formVisible = visible
-    },
-    // TODO mixin it
-    toFixed: num => {
-      return isNaN(num) ? '0' : parseFloat(num).toFixed(num <= 0 || num >= 1 ? 2 : 5)
-    },
-    toFixedPercent: num => {
-      return isNaN(num) ? '0' : parseFloat(num).toFixed(2)
     }
   },
   async mounted () {

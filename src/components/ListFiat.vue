@@ -1,13 +1,13 @@
 <template>
     <div>
       <div class='rate-date-label'>Fiat rates from openrates.io in </div>
-      <div class='rate-date-value'>{{ fiatRate.date }}</div>
+      <div class='rate-date-value'>{{ fiatRateDate }}</div>
       <div v-for="(value, name, index) in fiatRate.rates" :key="index">
         <div class="card">
             <img :src="require(`../assets/${name.toLowerCase()}.png`)">
             <div class="container">
                 <div class='coin-name'>{{ fiatRate.base }} / {{ name }}</div>
-                <div class='coin-value'>{{ value }}</div>
+                <div class='coin-value'>{{ toFixed(value) }}</div>
             </div>
         </div>
       </div>
@@ -16,8 +16,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { util } from '../mixins/util'
+
 export default {
   name: 'ListFiat',
+  mixins: [util],
   methods: {
     ...mapActions([
       'loadFiat'
@@ -27,7 +30,8 @@ export default {
     this.loadFiat()
   },
   computed: mapGetters({
-    fiatRate: 'getFiatRate'
+    fiatRate: 'getFiatRate',
+    fiatRateDate: 'getFiatRateDate'
   })
 
 }
