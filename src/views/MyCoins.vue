@@ -74,9 +74,7 @@
               </tr>
           </tbody>
       </table>
-      <div class="hint">All USD prices are calculated using rate from openrates.io in
-        {{ fiatRateDate }} at around 4:00pm CET
-      </div>
+      <Disclaimer/>
     </div>
   </div>
 </template>
@@ -85,6 +83,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import FormMyCoin from '../components/FormMyCoin.vue'
 import AlertMessage from '../components/AlertMessage'
+import Disclaimer from '../components/Disclaimer'
 import uuid from 'uuid'
 import { util } from '../mixins/util'
 
@@ -93,7 +92,8 @@ export default {
   mixins: [util],
   components: {
     FormMyCoin,
-    AlertMessage
+    AlertMessage,
+    Disclaimer
   },
   data: function () {
     return {
@@ -137,7 +137,6 @@ export default {
       fiatNames: 'getFiatNames',
       cryptoNames: 'getCryptoNames',
       // fiatRate: 'getFiatRate'
-      fiatRateDate: 'getFiatRateDate',
       message: 'getMessage'
     })
   }
@@ -203,10 +202,6 @@ table th {
 .smallfiat {
   font-size: 10px;
   font-weight: 800;
-}
-
-.hint {
-  padding: .625em;
 }
 
 @media screen and (max-width: 1400px) {
