@@ -46,7 +46,7 @@ const actions = {
   },
   async saveCoin ({ commit, dispatch }, coin) {
     try {
-      if (state.myCoins.some(c => (c.name === coin.name && c.id !== coin.id))) {
+      if (state.myCoins.some(c => (c.name === coin.name && c.fiat === coin.fiat))) {
         commit('SET_MESSAGE', { messageType: 'error', description: 'Coin already exist.' })
         return
       }
@@ -64,10 +64,12 @@ const actions = {
     }
   },
   async loadPrices ({ commit }) {
+    // const assets = []
     const assets = []
     let totalBuyValue = 0
     state.myCoins.forEach(c => {
-      assets.push(c.name.toLowerCase())
+      // assets.push(c.name.toLowerCase())
+      assets.push({ name: c.name.toLowerCase(), fiat: c.fiat })
       totalBuyValue += +c.buyValueFiat
       c.currentPrice = 0
       c.currentValue = 0
@@ -76,30 +78,31 @@ const actions = {
     })
     try {
       if (state.pricesWs) state.pricesWs.close()
-      state.pricesWs = new WebSocket(`wss://ws.coincap.io/prices?assets=${assets.toString()}`)
+      const assetNames = assets.map(asset => {
+        return asset.name
+      })
+      state.pricesWs = new WebSocket(`wss://ws.coincap.io/prices?assets=${assetNames.toString()}`)
       state.pricesWs.onmessage = msg => {
         state.myCoins.forEach(c => {
           c.currentPriceColor = '#000'
         })
-        // console.log(msg)
         assets.forEach(asset => {
-          const coin = state.myCoins.find(c => c.name.toLowerCase() === asset)
-          if (!JSON.parse(msg.data)[asset]) return
-
+          const coin = state.myCoins.find(c => c.name.toLowerCase() === asset.name && c.fiat === asset.fiat)
+          if (!JSON.parse(msg.data)[asset.name]) return
           coin.buyPriceFiat = (coin.buyValueFiat / coin.amount)
           coin.buyPriceUSD = (coin.buyValueFiat / coin.amount) / state.fiat.rates[coin.fiat]
           coin.currentPriceColor =
             parseFloat(coin.currentPrice).toFixed(coin.currentPrice > 1 ? 2 : 5) >
-              parseFloat(JSON.parse(msg.data)[asset]).toFixed(coin.currentPrice > 1 ? 2 : 5)
+              parseFloat(JSON.parse(msg.data)[asset.name]).toFixed(coin.currentPrice > 1 ? 2 : 5)
               ? '#FA8072'
               : parseFloat(coin.currentPrice).toFixed(coin.currentPrice > 1 ? 2 : 5) <
-                parseFloat(JSON.parse(msg.data)[asset]).toFixed(coin.currentPrice > 1 ? 2 : 5)
+                parseFloat(JSON.parse(msg.data)[asset.name]).toFixed(coin.currentPrice > 1 ? 2 : 5)
                 ? '#90EE90'
                 : '#000'
-          coin.currentPrice = JSON.parse(msg.data)[asset]
-          coin.currentValue = JSON.parse(msg.data)[asset] * coin.amount
+          coin.currentPrice = JSON.parse(msg.data)[asset.name]
           coin.allocation = coin.buyValueFiat / totalBuyValue * 100
           coin.buyValueUSD = coin.buyValueFiat / state.fiat.rates[coin.fiat]
+          coin.currentValue = JSON.parse(msg.data)[asset.name] * coin.amount
           coin.gainLoss = coin.currentValue - (coin.buyPriceFiat * coin.amount / state.fiat.rates[coin.fiat])
           coin.gainLossPercent = ((coin.currentValue / (coin.buyPriceUSD * coin.amount)) * 100) - 100
           const index = state.myCoins.findIndex(c => c.id === coin.id)
@@ -132,7 +135,7 @@ const mutations = {
     state.myCoins = myCoins
   },
   ADD_COIN (state, coin) {
-    const coins = state.myCoins.filter(c => c.name !== coin.name)
+    const coins = state.myCoins.filter(c => c.id !== coin.id)
     coins.push(coin)
     state.myCoins = coins
     // const index = state.myCoins.findIndex(c => c.id === coin.id)
