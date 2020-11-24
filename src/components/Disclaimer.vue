@@ -1,6 +1,9 @@
 <template>
-    <div class="hint">All USD prices are calculated using rate from openrates.io in
-        {{ fiatRateDate }} at around 4:00pm CET <br><br>
+    <div class="hint">All USD prices are calculated using rate from awesomeapi.com.br. <br><br>
+        <span v-for="(value,index) in fiat" :key="index">
+          {{ value.code }}/{{ value.codein }} rate {{ value.rate }} on {{ value.date }} at {{ value.time}};
+        </span>
+        * Brasilia Time <br><br>
         Thank you for using the free meus cryptos website.
         This Website is offered on an "as is" basis and comes with no warranty.
      </div>
@@ -13,7 +16,7 @@ export default {
   name: 'disclaimer',
   computed: {
     ...mapGetters({
-      fiatRateDate: 'getFiatRateDate'
+      fiat: 'getFiat'
     })
   }
 }

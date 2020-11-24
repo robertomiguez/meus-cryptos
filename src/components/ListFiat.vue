@@ -1,13 +1,13 @@
 <template>
     <div>
-      <div class='rate-date-label'>Fiat rates from openrates.io in </div>
-      <div class='rate-date-value'>{{ fiatRateDate }}</div>
-      <div v-for="(value, name, index) in fiatRate.rates" :key="index">
+      <div class='rate-source-label'>Fiat rates from awesomeapi.com.br</div>
+      <div v-for="(value, key, index) in fiat" :key="index">
         <div class="card">
-            <img :src="require(`../assets/${name.toLowerCase()}.png`)">
+            <img :src="require(`../assets/${key.toLowerCase()}.png`)">
             <div class="container">
-                <div class='coin-name'>{{ fiatRate.base }} / {{ name }}</div>
-                <div class='coin-value'>{{ toFixed(value) }}</div>
+                <div class='coin-name'>{{ value.code }} / {{ value.codein }}</div>
+                <div class='coin-value'>{{ value.rate }}</div>
+                <div class='rate-date-value'>{{ value.date }} {{ value.time }}</div>
             </div>
         </div>
       </div>
@@ -29,10 +29,11 @@ export default {
   mounted () {
     this.loadFiat()
   },
-  computed: mapGetters({
-    fiatRate: 'getFiatRate',
-    fiatRateDate: 'getFiatRateDate'
-  })
+  computed: {
+    ...mapGetters({
+      fiat: 'getFiat'
+    })
+  }
 
 }
 </script>
@@ -76,14 +77,14 @@ img {
   font-family: fantasy;
 }
 
-.rate-date-label {
-  font-size: 13px;
+.rate-source-label {
+  font-size: 15px;
   font-family: fantasy;
   margin-top: 40px;
 }
 
 .rate-date-value {
-  font-size: 15px;
+  font-size: 11px;
   font-family: fantasy;
 }
 
