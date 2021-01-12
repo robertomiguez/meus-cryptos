@@ -35,7 +35,8 @@ const actions = {
               code: +rate > 1 ? value.code : 'USD',
               codein: key === 'BRL' ? key : +rate < 1 ? value.code : 'USD',
               rate: key === 'BRL'
-                ? rate : +rate < 1
+                ? rate
+                : +rate < 1
                   ? ((1 / +rate) * USDRate).toFixed(4)
                   : (+rate / +USDRate).toFixed(4), // Change BRL Rate to USD Ratex
               date: `${day}-${month}-${year}`,
