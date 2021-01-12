@@ -1,1 +1,2 @@
-GET https://api.openrates.io/latest?base=USD&symbols=GBP,EUR
+GET https://economia.awesomeapi.com.br/all/USD-BRL,GBP-BRL,EUR-BRL,ARS-BRL
+GET https://api.coincap.io/v2/assets
