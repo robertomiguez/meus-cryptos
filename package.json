@@ -2,6 +2,9 @@
   "name": "meus-cryptos",
   "version": "0.1.1",
   "private": true,
+  "jest": {
+    "verbose": true
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
