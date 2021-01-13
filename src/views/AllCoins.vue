@@ -31,7 +31,7 @@
                 <td data-label="Supply">{{ toFixedMarket(ticker.supply) }}</td>
                 <td data-label="Volume (24Hr)">{{`$`}}{{ toFixedMarket(ticker.volumeUsd24Hr) }}</td>
                 <td data-label="Change (24Hr)" :style="{color: ticker.changePercent24Hr < 0 ? '#a56361' : '#7596bd'}">
-                  {{ toFixedPercent(ticker.changePercent24Hr) }} %</td>
+                  {{ toFixed(ticker.changePercent24Hr) }} %</td>
               </tr>
           </tbody>
       </table>

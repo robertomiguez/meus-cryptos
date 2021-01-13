@@ -47,8 +47,8 @@
                 <td :style="{backgroundColor:myCoin.currentPriceColor}"
                     data-label="Current price">{{`$`}}{{ toFixed(myCoin.currentPrice) }}
                 </td>
-                <td data-label="Allocation">{{ toFixedPercent(myCoin.allocation) }} {{`%`}}</td>
-                <td data-label="Amount">{{ toFixed(myCoin.amount) }}</td>
+                <td data-label="Allocation">{{ toFixed(myCoin.allocation) }} {{`%`}}</td>
+                <td data-label="Amount">{{ toFixedCrypto(myCoin.amount) }}</td>
                 <td data-label="Buy Value (Fiat)">
                   <span class="smallfiat">{{ myCoin.fiat }}</span>
                   {{ toFixed(myCoin.buyValueFiat) }}
@@ -57,7 +57,7 @@
                 <td data-label="Current Value">{{`$`}}{{ toFixed(myCoin.currentValue) }}</td>
                 <td data-label="Gain/Loss"
                   :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? '#a56361' : '#7596bd'}">
-                  {{`$`}}{{ toFixed(myCoin.gainLoss) }} ({{ toFixedPercent(myCoin.gainLossPercent) }}%)
+                  {{`$`}}{{ toFixed(myCoin.gainLoss) }} ({{ toFixed(myCoin.gainLossPercent) }}%)
                 </td>
                 <td data-label="Actions">
                   <font-awesome-icon
