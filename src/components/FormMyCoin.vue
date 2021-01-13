@@ -2,7 +2,7 @@
   <ul class="wrapper">
     <li class="form-row">
       <label for="cryptoName">Crypto</label>
-      <select v-model="coin.name" id="cryptoName">
+      <select v-model="myCoin.name" id="cryptoName">
         <option v-for="(cryptoName, index) in cryptoNames" :key="index">
           {{ cryptoName }}
         </option>
@@ -10,7 +10,7 @@
     </li>
     <li class="form-row">
       <label for="fiatName">Fiat</label>
-        <select v-model="coin.fiat" id="fiatName">
+        <select v-model="myCoin.fiat" id="fiatName">
           <option v-for="(fiatName, index) in fiatNames" :key="index">
             {{ fiatName }}
           </option>
@@ -18,11 +18,11 @@
     </li>
     <li class="form-row">
       <label for="buyValueFiat">Fiat value</label>
-      <input v-model="coin.buyValueFiat" id="buyValueFiat" placeholder="Enter the buy Fiat value.">
+      <input v-model="myCoin.buyValueFiat" id="buyValueFiat" placeholder="Enter the buy Fiat value.">
     </li>
     <li class="form-row">
       <label for="amount">Amount</label>
-      <input v-model="coin.amount" id="amount" placeholder="Enter the amount">
+      <input v-model="myCoin.amount" id="amount" placeholder="Enter the amount">
     </li>
     <li class="form-row">
         <button @click.prevent="save">Save</button>
@@ -51,14 +51,21 @@ export default {
   },
   methods: {
     ...mapActions([
-      'saveCoin'
+      'saveCoin',
+      'cancelCoin'
     ]),
     async save () {
-      await this.saveCoin(this.coin)
+      await this.saveCoin(this.myCoin)
       this.$emit('updateMode', false)
     },
-    cancel () {
+    async cancel () {
+      await this.cancelCoin()
       this.$emit('updateMode', false)
+    }
+  },
+  computed: {
+    myCoin: function () {
+      return this.coin
     }
   }
 }

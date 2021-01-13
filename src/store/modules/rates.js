@@ -86,6 +86,13 @@ const actions = {
       commit('SET_MESSAGE', { messageType: 'error', description: `Error on saving new coin. ${error}` })
     }
   },
+  async cancelCoin ({ commit, dispatch }) {
+    try {
+      dispatch('loadMyCoins')
+    } catch (error) {
+      commit('SET_MESSAGE', { messageType: 'error', description: `Error on canceling a new coin. ${error}` })
+    }
+  },
   async loadPrices ({ commit }) {
     const assets = []
     let totalBuyValue = 0
