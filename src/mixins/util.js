@@ -8,8 +8,10 @@ export const util = {
       return isNaN(num) ? '0' : parseFloat(num).toFixed(2)
     },
     toFixedMarket: num => {
-      return num > 1000000000 ? parseFloat(num / 1000000000).toFixed(2) + 'B'
-        : num > 1000000 ? parseFloat(num / 1000000).toFixed(2) + 'M'
+      return num > 1000000000
+        ? parseFloat(num / 1000000000).toFixed(2) + 'B'
+        : num > 1000000
+          ? parseFloat(num / 1000000).toFixed(2) + 'M'
           : parseFloat(num / 1000).toFixed(2) + 'K'
     }
   }
