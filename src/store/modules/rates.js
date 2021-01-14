@@ -77,7 +77,7 @@ const actions = {
       const
         {
           buyPriceFiat, buyPriceUSD, allocation, currentPrice, currentPriceColor,
-          currentValue, buyValueUSD, gainLoss, gainLossPercent, ...tmpCoin
+          currentValue, buyValueUSD, profit, profitPercent, ...tmpCoin
         } = coin
       await idb.saveCoin(tmpCoin)
       commit('ADD_COIN', tmpCoin)
@@ -104,8 +104,8 @@ const actions = {
         : c.buyValueFiat * state.fiat[c.fiat].rate
       c.currentPrice = 0
       c.currentValue = 0
-      c.gainLoss = 0
-      c.gainLossPercent = 0
+      c.profit = 0
+      c.profitPercent = 0
     })
     try {
       if (state.pricesWs) state.pricesWs.close()
@@ -140,8 +140,8 @@ const actions = {
             ? coin.buyValueFiat / state.fiat.[coin.fiat].rate
             : coin.buyValueFiat * state.fiat.[coin.fiat].rate
           coin.currentValue = JSON.parse(msg.data)[asset.name] * coin.amount
-          coin.gainLoss = coin.currentValue - coin.buyValueUSD
-          coin.gainLossPercent = ((coin.currentValue / (coin.buyValueUSD)) * 100) - 100
+          coin.profit = coin.currentValue - coin.buyValueUSD
+          coin.profitPercent = ((coin.currentValue / (coin.buyValueUSD)) * 100) - 100
           // const index = state.myCoins.findIndex(c => c.id === coin.id)
           // if (index !== -1) state.myCoins.splice(index, 1, coin)
         })

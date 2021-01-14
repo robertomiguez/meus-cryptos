@@ -31,8 +31,9 @@
                 <th scope="col">Buy value (Fiat)</th>
                 <th scope="col">Buy value (USD)</th>
                 <th scope="col">Current Value</th>
-                <th scope="col" class='gainloss'>Gain/Loss</th>
-                <th scope="col"></th>
+                <th scope="col">Profit</th>
+                <th scope="col">Profit %</th>
+                <th scope="col" class='actions'></th>
               </tr>
           </thead>
           <tbody>
@@ -55,9 +56,13 @@
                 </td>
                 <td data-label="Buy Value (USD)">{{`$`}}{{ toFixed(myCoin.buyValueUSD) }}</td>
                 <td data-label="Current Value">{{`$`}}{{ toFixed(myCoin.currentValue) }}</td>
-                <td data-label="Gain/Loss"
-                  :style="{color: isNaN(myCoin.gainLoss) ? 'grey' : myCoin.gainLoss < 0 ? '#a56361' : '#7596bd'}">
-                  {{`$`}}{{ toFixed(myCoin.gainLoss) }} ({{ toFixed(myCoin.gainLossPercent) }}%)
+                <td data-label="Profit"
+                  :style="{color: isNaN(myCoin.profit) ? 'grey' : myCoin.profit < 0 ? '#a56361' : '#7596bd'}">
+                  {{`$`}}{{ toFixed(myCoin.profit) }}
+                </td>
+                <td data-label="Profit %"
+                  :style="{color: isNaN(myCoin.profit) ? 'grey' : myCoin.profit < 0 ? '#a56361' : '#7596bd'}">
+                  {{ toFixed(myCoin.profitPercent) }}%
                 </td>
                 <td data-label="Actions">
                   <font-awesome-icon
@@ -189,10 +194,11 @@ table th {
 .column-name {
   padding-left: 1.625em;
   text-align: left;
+  width: 110px;
 }
 
-.gainloss {
-  width: 150px;
+.actions {
+  width: 35px;
 }
 
 .icon {
@@ -254,6 +260,7 @@ table th {
   .column-name {
     padding-left: .625em;
     text-align: right;
+    width: auto;
   }
 }
 
