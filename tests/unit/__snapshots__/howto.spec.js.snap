@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HowTo renders the component 1`] = `
+<div class="main">
+  <div class="title">Keep track of your cryptos</div>
+  <div class="step">First step - Push add button. </div>
+  <div><img src="@/assets/step1.jpg"></div>
+  <div class="step">Second step - Fill the form</div>
+  <div><img src="@/assets/step2.jpg"></div>
+  <div class="step">Third step - Crypto list</div>
+  <div><img src="@/assets/step3.jpg"></div>
+</div>
+`;

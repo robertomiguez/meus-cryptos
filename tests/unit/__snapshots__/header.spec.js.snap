@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders the component 1`] = `
+<div>
+  <header class="header"><a href="" class="title">Meus Cryptos</a> <img src="@/assets/squirrel.png" class="logo"> <input type="checkbox" id="menu-btn" class="menu-btn"> <label for="menu-btn" class="menu-icon"><span class="navicon"></span></label>
+    <ul class="menu">
+      <li>
+        <router-link-stub to="/">My positions</router-link-stub>
+      </li>
+      <li>
+        <router-link-stub to="/allcoins">All coins</router-link-stub>
+      </li>
+      <li>
+        <router-link-stub to="/supportedcryptos">Supported Cryptos</router-link-stub>
+      </li>
+      <li>
+        <router-link-stub to="/howto">Help ?</router-link-stub>
+      </li>
+    </ul>
+  </header>
+</div>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders the component 1`] = `
+<div class="footer">
+  <div class="follow">
+    Powered by CoinCap API | Follow me:
+    <font-awesome-icon-stub icon="[object Object]" class="icon"></font-awesome-icon-stub>
+  </div>
+</div>
+`;
